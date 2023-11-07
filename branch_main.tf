@@ -10,6 +10,8 @@ resource "github_branch_default" "main" {
 
 // https://registry.terraform.io/providers/integrations/github/latest/docs/resources/branch_protection
 resource "github_branch_protection" "main" {
+  count = var.visibility == "private" ? 0 : 1
+
   repository_id = github_repository.this.node_id
 
   pattern        = "main"
@@ -29,5 +31,4 @@ resource "github_branch_protection" "main" {
     restrict_dismissals             = false
     required_approving_review_count = 1
   }
-
 }
