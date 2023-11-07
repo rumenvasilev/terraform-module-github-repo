@@ -1,0 +1,4 @@
+name         = "<name of the repository>"
+description  = "<some description for this repository>"
+visibility   = "public"
+gha_patterns = ["sample/action@v1"]
