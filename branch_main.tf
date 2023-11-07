@@ -1,6 +1,6 @@
 resource "github_branch" "main" {
   repository = github_repository.this.name
-  branch     = "main"
+  branch     = var.branch
 }
 
 resource "github_branch_default" "main" {
@@ -14,7 +14,7 @@ resource "github_branch_protection" "main" {
 
   repository_id = github_repository.this.node_id
 
-  pattern        = "main"
+  pattern        = var.branch
   enforce_admins = false
 
   require_signed_commits = true
@@ -23,7 +23,8 @@ resource "github_branch_protection" "main" {
   allows_deletions = false
 
   required_status_checks {
-    strict = true
+    strict   = true
+    contexts = var.branch_status_checks
   }
 
   required_pull_request_reviews {
